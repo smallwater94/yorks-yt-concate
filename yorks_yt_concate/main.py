@@ -3,8 +3,6 @@ import json
 
 from yorks_yt_concate.settings import API_KEY
 
-print(API_KEY)
-
 CHANNEL_ID = 'UCjXfkj5iapKHJrhYfAF9ZGg'
 
 
@@ -29,9 +27,10 @@ def get_all_video_in_channel(channel_id):
             next_page_token = resp['nextPageToken']
             url = first_url + '&pageToken={}'.format(next_page_token)
         except KeyError:
-            print('Get urls complete')
+            print('Get urls Complete!')
             break
     return video_links
 
-# video_list = get_all_video_in_channel(CHANNEL_ID)
-# print(len(video_list))
+
+video_list = get_all_video_in_channel(CHANNEL_ID)
+print(len(video_list))

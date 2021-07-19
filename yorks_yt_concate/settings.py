@@ -1,3 +1,4 @@
+# 用來存取API_KEY
 import os
 from dotenv import load_dotenv
 

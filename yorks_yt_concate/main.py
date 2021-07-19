@@ -3,13 +3,15 @@ import json
 
 CHANNEL_ID = 'UCjXfkj5iapKHJrhYfAF9ZGg'
 
-def get_all_video_in_channel(CHANNEL_ID):
-    api_key = 'API_KEY'
+
+def get_all_video_in_channel(channel_id):
+    api_key = 'AIzaSyAV3TywEfLYEeEFssMyZV5-idtN9VzV3sY'
 
     base_video_url = 'https://www.youtube.com/watch?v='
     base_search_url = 'https://www.googleapis.com/youtube/v3/search?'
 
-    first_url = base_search_url+'key={}&channelId={}&part=snippet,id&order=date&maxResults=25'.format(api_key, CHANNEL_ID)
+    first_url = base_search_url + 'key={}&channelId={}&part=snippet,id&order=date&maxResults=25'.format(api_key,
+                                                                                                        channel_id)
 
     video_links = []
     url = first_url
@@ -24,11 +26,10 @@ def get_all_video_in_channel(CHANNEL_ID):
         try:
             next_page_token = resp['nextPageToken']
             url = first_url + '&pageToken={}'.format(next_page_token)
-        except:
+        except KeyError:
             break
     return video_links
 
 
-
-x = get_all_video_in_channel(CHANNEL_ID)
-print(len(x))
+video_list = get_all_video_in_channel(CHANNEL_ID)
+print(len(video_list))

@@ -1,16 +1,18 @@
 import urllib.request
 import json
 
+from yorks_yt_concate.settings import API_KEY
+
+print(API_KEY)
+
 CHANNEL_ID = 'UCjXfkj5iapKHJrhYfAF9ZGg'
 
 
 def get_all_video_in_channel(channel_id):
-    api_key = 'AIzaSyAV3TywEfLYEeEFssMyZV5-idtN9VzV3sY'
-
     base_video_url = 'https://www.youtube.com/watch?v='
     base_search_url = 'https://www.googleapis.com/youtube/v3/search?'
 
-    first_url = base_search_url + 'key={}&channelId={}&part=snippet,id&order=date&maxResults=25'.format(api_key,
+    first_url = base_search_url + 'key={}&channelId={}&part=snippet,id&order=date&maxResults=25'.format(API_KEY,
                                                                                                         channel_id)
 
     video_links = []
@@ -27,9 +29,9 @@ def get_all_video_in_channel(channel_id):
             next_page_token = resp['nextPageToken']
             url = first_url + '&pageToken={}'.format(next_page_token)
         except KeyError:
+            print('Get urls complete')
             break
     return video_links
 
-
-video_list = get_all_video_in_channel(CHANNEL_ID)
-print(len(video_list))
+# video_list = get_all_video_in_channel(CHANNEL_ID)
+# print(len(video_list))
